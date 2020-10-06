@@ -26,7 +26,7 @@ add_definitions(${LLVM_DEFINITIONS})
 add_executable(test_1 src/test_1.cpp)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_VERBOSE_MAKEFILE ON)
-set(CMAKE_BUILD_TYPE "type_of_build")
+set(CMAKE_BUILD_TYPE "Debug")
 
 # Find the libraries that correspond to the LLVM components
 # that we wish to use
@@ -34,3 +34,11 @@ llvm_map_components_to_libnames(llvm_libs support core irreader)
 
 # Link against LLVM libraries
 target_link_libraries(test_1 ${llvm_libs})
+
+# installation
+install(TARGETS test_1 DESTINATION bin)
+include(InstallRequiredSystemLibraries)
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/License.txt")
+set(CPACK_PACKAGE_VERSION_MAJOR 1)
+set(CPACK_PACKAGE_VERSION_MINOR 0)
+include(CPack)
